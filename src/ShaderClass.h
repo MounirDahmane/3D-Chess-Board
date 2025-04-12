@@ -1,5 +1,4 @@
-#pragma once // or #ifnded Shader.H \n #define Shader.H ... #endif
-
+#pragma once 
 
 #include <glad/glad.h>
 #include <iostream>
@@ -11,19 +10,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-
-
 class MyShader
 {
 public:
 	unsigned int ID;
 	std::pair<const char*, const char*> Path;
 
-	MyShader(const char* VertexShaderSourcePath, const char* FragmentShaderSourcePath)
-		:Path(VertexShaderSourcePath, FragmentShaderSourcePath)
+	MyShader(const char* vertexShaderSourcePath, const char* fragmentShaderSourcePath)
+		:Path(vertexShaderSourcePath, fragmentShaderSourcePath)
 	{
-		std::ifstream VS_path;
-		std::ifstream FS_path;
+		std::ifstream vsPath;
+		std::ifstream fsPath;
 
 		std::string VS;
 		std::string FS;
@@ -33,20 +30,18 @@ public:
 
 		std::stringstream fsStream; // vsStream
 
-		// just ensure that the streams will throw exceptions
-
-		VS_path.exceptions(std::ifstream::failbit | std::ifstream::badbit); // or another way to do this is remove failbit 
-		FS_path.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		vsPath.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+		fsPath.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 		try
 		{
-			VS_path.open(VertexShaderSourcePath);
-			FS_path.open(FragmentShaderSourcePath);
+			vsPath.open(vertexShaderSourcePath);
+			fsPath.open(fragmentShaderSourcePath);
 
 			try
 			{
-				if (VS_path.is_open())
+				if (vsPath.is_open())
 				{
-					while (std::getline(VS_path, vsHolder))
+					while (std::getline(vsPath, vsHolder))
 					{
 						VS += vsHolder + "\n";
 					}
@@ -54,11 +49,11 @@ public:
 			}
 			catch (std::ifstream::failure e) {}
 
-			//vsStream << VS_path.rdbuf();
-			fsStream << FS_path.rdbuf();
+			//vsStream << vsPath.rdbuf();
+			fsStream << fsPath.rdbuf();
 
-			VS_path.close();
-			FS_path.close();
+			vsPath.close();
+			fsPath.close();
 
 			//vsHolder = vsStream.str();
 			fsHolder = fsStream.str();
@@ -88,7 +83,7 @@ public:
 		MyShader::ID = glCreateProgram();
 		glAttachShader(MyShader::ID, vertex);
 		glAttachShader(MyShader::ID, fragment);
-		glLinkProgram(MyShader::ID);
+		glLinkProgram (MyShader::ID);
 
 		CheckError(MyShader::ID, 3);
 
@@ -96,10 +91,7 @@ public:
 		glDeleteShader(fragment);
 	}
 	~MyShader() { glDeleteProgram(MyShader::ID); }
-	void use()
-	{
-		glUseProgram(MyShader::ID);
-	}
+	void use()	{ glUseProgram(MyShader::ID);	}
 	void SetUniform1f(const char* uniform_name, float x)
 	{
 		glUniform1f(glGetUniformLocation(MyShader::ID, uniform_name), x);
@@ -124,7 +116,6 @@ public:
 			glUniformMatrix4fv(glGetUniformLocation(MyShader::ID, MAT_uniform_name), count, GL_FALSE, glm::value_ptr(matrix));
 	}
 private:
-
 	void CheckError(unsigned int shader, int type)
 	{
 		// 1 : vs, 2 : fs, else ps
@@ -161,7 +152,6 @@ private:
 			}
 		}
 	}
-
 };
 
 
