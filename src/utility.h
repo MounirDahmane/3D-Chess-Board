@@ -1,25 +1,27 @@
 #pragma once
 
+// PATH_TO_WD is a personal defined macro
+
 #define VERTEX_SHADER	PATH_TO_WD "/resources/Shaders/VertexShader.txt"
 #define FRAGMENT_SHADER	PATH_TO_WD "/resources/Shaders/FragmentShader.txt"
-#define FS_MODEL		PATH_TO_WD "/resources/Shaders/model_fs.txt"
-#define VS_MODEL		PATH_TO_WD "/resources/Shaders/model_vs.txt"
-#define VS_SKY			PATH_TO_WD "/resources/Shaders/v_SkyBox.txt"
-#define FS_SKY			PATH_TO_WD "/resources/Shaders/f_SkyBox.txt"
+#define FS_MODEL	PATH_TO_WD "/resources/Shaders/model_fs.txt"
+#define VS_MODEL	PATH_TO_WD "/resources/Shaders/model_vs.txt"
+#define VS_SKY		PATH_TO_WD "/resources/Shaders/v_SkyBox.txt"
+#define FS_SKY		PATH_TO_WD "/resources/Shaders/f_SkyBox.txt"
 								   
-#define CHESS_BOARD		PATH_TO_WD "/resources/models/chessBoard/chessBoard.obj"
+#define CHESS_BOARD	PATH_TO_WD "/resources/models/chessBoard/chessBoard.obj"
 #define BLACK_BISHOP	PATH_TO_WD "/resources/models/bishop/bishop.obj"
-#define GRAY_BISHOP		PATH_TO_WD "/resources/models/bishop_gray/bishop.obj"
-#define BLACK_KING		PATH_TO_WD "/resources/models/king/king.obj"
-#define GRAY_KING		PATH_TO_WD "/resources/models/king_gray/king.obj"
+#define GRAY_BISHOP	PATH_TO_WD "/resources/models/bishop_gray/bishop.obj"
+#define BLACK_KING	PATH_TO_WD "/resources/models/king/king.obj"
+#define GRAY_KING	PATH_TO_WD "/resources/models/king_gray/king.obj"
 #define BLACK_KNIGHT	PATH_TO_WD "/resources/models/knight/knight.obj"
-#define GRAY_KNIGHT		PATH_TO_WD "/resources/models/knight_gray/knight.obj"
-#define BLACK_PAWN		PATH_TO_WD "/resources/models/pawn/pawn.obj"
-#define GRAY_PAWN		PATH_TO_WD "/resources/models/pawn_gray/pawn.obj"
-#define BLACK_QUEEN		PATH_TO_WD "/resources/models/queen/queen.obj"
-#define GRAY_QUEEN		PATH_TO_WD "/resources/models/queen_gray/queen.obj"
-#define BLACK_ROOK		PATH_TO_WD "/resources/models/rook/rook.obj"
-#define GRAY_ROOK		PATH_TO_WD "/resources/models/rook_gray/rook.obj"
+#define GRAY_KNIGHT	PATH_TO_WD "/resources/models/knight_gray/knight.obj"
+#define BLACK_PAWN	PATH_TO_WD "/resources/models/pawn/pawn.obj"
+#define GRAY_PAWN	PATH_TO_WD "/resources/models/pawn_gray/pawn.obj"
+#define BLACK_QUEEN	PATH_TO_WD "/resources/models/queen/queen.obj"
+#define GRAY_QUEEN	PATH_TO_WD "/resources/models/queen_gray/queen.obj"
+#define BLACK_ROOK	PATH_TO_WD "/resources/models/rook/rook.obj"
+#define GRAY_ROOK	PATH_TO_WD "/resources/models/rook_gray/rook.obj"
 
 unsigned int width = 1280, height = 720;
 float deltaTime = 0.0f;
@@ -31,48 +33,48 @@ float last_y = height / 2;
 float percentage = 0.7f;
 
 const float CULLING[] = {
-	// back face
+	 // back face
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f, // bottom-left
 	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f, // top-right
 	 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  0.0f, // bottom-right
 	 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  1.0f,  1.0f, // top-right
 	-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f, // bottom-left
 	-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  1.0f, // top-left
-	// front face
+	 // front face
 	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f, // bottom-left
 	 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  0.0f, // bottom-right
 	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f, // top-right
 	 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  1.0f,  1.0f, // top-right
 	-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  1.0f, // top-left
 	-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,  0.0f,  0.0f, // bottom-left
-	// left face
+	 // left face
 	-0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // top-right
 	-0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  1.0f, // top-left
 	-0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // bottom-left
 	-0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // bottom-left
 	-0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  0.0f,  0.0f, // bottom-right
 	-0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,  1.0f,  0.0f,	// top-right
-	// right face
-	0.5f,   0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // top-left
-	0.5f,  -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // bottom-right
-	0.5f,   0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f, // top-right
-	0.5f,  -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // bottom-right
-	0.5f,   0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // top-left
-	0.5f,  -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f, // bottom-left
-	// bottom face
-   -0.5f,  -0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f, // top-right
-	0.5f,  -0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f, // top-left
-	0.5f,  -0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f, // bottom-left
-	0.5f,  -0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f, // bottom-left
-   -0.5f,  -0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f, // bottom-right
-   -0.5f,  -0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f, // top-right
-   // top face
-  -0.5f,   0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f, // top-left
-   0.5f,   0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
-   0.5f,   0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f, // top-right
-   0.5f,   0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
-  -0.5f,   0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f, // top-left
-  -0.5f,   0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f  // bottom-left
+	 // right face
+         0.5f,   0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // top-left
+	 0.5f,  -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // bottom-right
+	 0.5f,   0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  1.0f, // top-right
+	 0.5f,  -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  1.0f, // bottom-right
+	 0.5f,   0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  1.0f,  0.0f, // top-left
+	 0.5f,  -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,  0.0f,  0.0f, // bottom-left
+	 // bottom face
+        -0.5f,  -0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f, // top-right
+ 	 0.5f,  -0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  1.0f, // top-left
+	 0.5f,  -0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f, // bottom-left
+	 0.5f,  -0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  1.0f,  0.0f, // bottom-left
+        -0.5f,  -0.5f,  0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  0.0f, // bottom-right
+        -0.5f,  -0.5f, -0.5f,  0.0f,  1.0f,  0.0f,  0.0f,  1.0f, // top-right
+   	 // top face
+        -0.5f,   0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f, // top-left
+  	 0.5f,   0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+   	 0.5f,   0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  1.0f, // top-right
+   	 0.5f,   0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  1.0f,  0.0f, // bottom-right
+        -0.5f,   0.5f, -0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  1.0f, // top-left
+        -0.5f,   0.5f,  0.5f,  0.0f, -1.0f,  0.0f,  0.0f,  0.0f  // bottom-left
 };
 const float skyboxVertices[] = {
 	// back face
